@@ -1,0 +1,638 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+  <section class="slice bg-white rounded-bottom"
+    id="sct-features">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-sm-8">
+          <div class="card hover-shadow-lg" style="height: 25rem;">
+            <div class="card-body px-5">
+              <div class="py-4">
+                <div class="icon text-primary">
+                  <i class="fa fa-cogs"></i>
+                </div>
+              </div>
+              <h5>Design Strategy</h5>
+              <p class="mt-3 mb-0">
+                We provide two design strategies: (1) targeting single TE
+                duplicate and (2) targeting the entire TE
+                subfamily.
+              </p>
+              <p class="mt-3 mb-0">
+                To target copies from a TE subfamily, we 
+                adopted a greedy-search approach to find optimal combination 
+                of 3 sgRNAs to target as much copies.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-8">
+          <div class="card hover-shadow-lg" style="height: 25rem;">
+            <div class="card-body px-5">
+              <div class="py-4">
+                <div class="icon text-primary">
+                  <i class="fa fa-dna"></i>
+                </div>
+              </div>
+              <h5>Genome Assembly </h5>
+              <p class="mt-3 mb-0">
+                We are now supporting Genome Assembly 
+                <div class="d-flex align-items-center align-items-center mb-1">
+                  <div>
+                    <div class="icon icon-sm icon-shape bg-primary text-white rounded-circle mr-4">
+                      <i class="fa fa-check"></i>
+                    </div>
+                  </div>
+                  <a
+                  href="http://ensembl.org/Homo_sapiens/"><i class="fa-solid fa-person"></i>Human:
+                  GRCh38/hg38</a>
+                </div>
+                <div class="d-flex align-items-center align-items-center mb-3">
+                  <div>
+                    <div class="icon icon-sm icon-shape bg-primary text-white rounded-circle mr-4">
+                      <i class="fa fa-check"></i>
+                    </div>
+                  </div>
+                  <a
+                  href="http://ensembl.org/Mus_musculus/"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                  viewBox="0 0 612 612" style="enable-background:new 0 0 612 612; width:5%" xml:space="preserve">
+               <style type="text/css">
+                 .st0{fill:#3371FF;}
+               </style>
+               <g>
+                 <g>
+                   <path class="st0" d="M49.9,443.3c-0.9,1.2-1.7,2.1-2.1,2.3c-16,12-22.1,1.2-37.1,13.1c-2.4,1.9-5.9,12.9-8.7,23.6
+                     c-3.1,11.4-4,22.6,7.8,22.6h1H37h350.2h21.4H474c6.3,0,12.5-1.5,18.1-4.5c209.4-110.8,89.5-238.6,47.4-299.7
+                     c-32.1-46.6-13.3-93.7-13.3-93.7s-73.6,25.1,16.2,141.4c58.5,75.7,25.6,129.2-4.5,157.3c3-11.4,4.6-23.4,4.5-35.7
+                     c-0.6-74-61.9-133-135.8-132.6c-46.6,0.3-89.1,8.9-127.6,23c4.4,13.6,4.9,28.3,1.5,43.1c-4.7,20.1-16.2,38.2-32.6,50.9
+                     c-16.2,12.6-36.4,19.6-57,19.6h-64.1h-18.4C84.6,398.4,65,422.5,49.9,443.3z M120.6,407.7c11.5,0.6,20.4,10.5,19.8,22
+                     c-0.6,11.5-10.5,20.4-22,19.8s-20.4-10.5-19.8-22C99.2,416,109.1,407.1,120.6,407.7z"/>
+                   <path class="st0" d="M133.4,350.3h57.5c31.4,0,59.1-21.4,66.3-52c2.4-10.5,2-20.2-0.4-28.8c-7.9-27.4-36.8-44.4-64.2-44.4
+                     c-13.2,0-26,3.9-35.9,12.6c-46.7,40.7-29.7,112.6-29.7,112.6H133.4z"/>
+                 </g>
+               </g>
+               </svg></i>  Mouse:
+                  GRCm38/mm10</a>.
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-8">
+          <div class="card hover-shadow-lg" style="height: 25rem;">
+            <div class="card-body px-5">
+              <div class="py-4">
+                <div class="icon text-primary">
+                  <i class="fa fa-window-restore"></i>
+                </div>
+              </div>
+              <h5>Transposable elements</h5>
+              <p class="mt-3 mb-0">
+                  Our annotation of transposable elements are based on repeatmasker.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="margin-top: 5rem;">
+      <div class="row justify-content-center" id="basic-features">
+        <div class="col-lg-3 col-sm-6">
+          <h2> Design For </h2>
+          <select class="custom-select label ui selection dropdown"
+            name="for" id="for">
+            <option value="1">
+              Targeting Single
+              Duplicate </option>
+            <option value="2">
+              Targeting TE subfamily
+            </option>
+          </select>
+        </div>
+
+        <div class="col-lg-3 col-sm-6">
+          <h2> Genome Assembly </h2>
+          <select class="custom-select label ui selection dropdown"
+            name="ga" id="ga">
+            <option value="hg38"><i class="fa-solid fa-person"></i>
+              Human: GRCh38/hg38
+            </option>
+            <option value="mm10">
+              Mouse: GRCm38/mm10
+            </option>
+          </select>
+        </div>
+        <div class="col-lg-3 col-sm-6" id="te-col-1">
+          <h2> Targeting TE </h2>
+          <input class="custom-select label ui selection dropdown"
+            list="te" name="te" id="te" placeholder="L1HS_dup23">
+            <br>
+            <small class='hint' style='text-align:left'>Input a name of TE duplicate: </small><br>
+            <small class='hint' style='text-align:left'> &lt;TE-SUBFAMILY&gt;_dup&lt;DUPLICATE-NUMBER&gt;</small><br>
+            <small class='alert' style="color: red;"></small>
+          
+        </div>
+        <div class="col-lg-3 col-sm-6 hidden" id="te-col-2">
+            <h2> Targeting TE </h2>
+            <div class="custom-select ui fluid search selection dropdown">
+              <input type='hidden'  name="te-combination-select" id="te-combination-select" placeholder="L1HS_dup23">
+              <div class="default text">Select TE Subfamily</div>
+                <div class="menu" id="te-menu">
+                </div>
+              </div>
+        </div>
+      </div>
+      <div class="justify-content-center hidden" id="advanced-features" style="background-color: #FFFFFF; margin-top: 2rem;">
+        <div class="row justify-content-center" id="basic-features">
+            <h2> Search for given sgRNA sequence or given TE sequence</h2>
+        </div>
+        <div class="row justify-content-center" id="basic-features">
+          <select class="label ui selection dropdown"
+              name="seq-for" id="seq-for">
+              <option value="1">
+                comma-separated 20bp sgRNA</option>
+              <option value="2">
+                genome sequence
+              </option>
+            </select>
+        </div>
+        <div class="justify-content-center" style="margin-top: 5pt;">
+            <div class="text-container">
+              <textarea class="ui label dropdown selection"
+              list="gseq" name="gseq" id="gseq" style="width: 80%;height:5pt;font-family: Courier; height: 100pt;"></textarea><br>
+              <div class="backdrop label ui selection" style="width: 80%">
+                <div class="highlights">
+                  <!-- cloned text with <mark> tags here -->
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="justify-content-center row"
+        style="margin-top: 10pt;">
+        <div class="button"
+          style="display:inline-block;zoom:50%;height: min-content;">
+          <div class="row">
+            <a id="submit" href="#"
+              class="btn btn-primary rounded-pill hover-translate-y-n3 mt-4 d-none d-sm-inline-block"
+              style="zoom: 2">Submit</a>
+            <a id="advanced-features-btn"
+              class="btn btn-white btn-icon rounded-pill hover-translate-y-n3 mt-4"
+              style="zoom: 2">
+              <span class="btn-inner--text">Search for sequence</span>
+              <span class="btn-inner--icon"><i
+                  class="fa fa-angle-right"></i></span>
+            </a>
+          </div>
+          <div class="main-loading"></div>
+        </div>
+      </div>
+
+    </div>
+    <br>
+    <br>
+    <a id="data-table-anchor"></a>
+    <div class="container">
+      <div class="card-body hidden" id="main-datatable-1"
+        style="color:black;text-align: center;">
+        <h1 id="search-result-pannel-1"></h1>
+
+        <div id="dataTable_wrapper"
+          class="dataTables_wrapper no-footer">
+          <div class="log" id="dataTable-1-log">
+
+          </div>
+          <table id="dataTable-1"
+            class="display nowrap dataTable dtr-inline no-footer"
+            role="grid" style="width: 100%;" cellspacing="0"
+            width="100%" aria-describedby="dataTable_info">
+            <thead role="row">
+              <tr role="row">
+                <th class="sorting" rowspan="1" colspan="1"
+                  tabindex="0" aria-controls="dataTable"
+                  style="width: 20px;">
+                  <br>
+                  gSeq
+                  <span data-toggle="tooltip"
+                    data-placement="right"
+                    data-title="The sgRNA sequence"
+                    data-original-title="" title="">
+                    <i class="fas fa-info-circle"
+                      id="tooltip-tsne"
+                      style="color: #A6B0C3;"></i>
+                  </span>
+                </th>
+                <th class="dt-body-right sorting"
+                  rowspan="1" colspan="1" tabindex="0"
+                  aria-controls="dataTable"
+                  style="width: 240px;"><br>Pos</th>
+                <th class="dt-body-right sorting"
+                  rowspan="1" colspan="1" tabindex="0"
+                  aria-controls="dataTable"
+                  style="width: 126px;"><br>Strand</th>
+                <th class="dt-body-right sorting"
+                  rowspan="1" colspan="1" tabindex="0"
+                  aria-controls="dataTable"
+                  style="width: 126px;"><br>GC-content</th>
+                <th class="dt-body-right sorting"
+                  rowspan="1" colspan="1" tabindex="0"
+                  aria-controls="dataTable"
+                  style="width: 126px;"><br>MM0
+                  <span data-toggle="tooltip"
+                  data-placement="right"
+                  data-title="Number of perfect mismatches/off-target sites in the genome"
+                  data-original-title="" title="">
+                  <i class="fas fa-info-circle"
+                    id="tooltip-tsne"
+                    style="color: #A6B0C3;"></i>
+                </span></th>
+                <th class="dt-body-right sorting"
+                  rowspan="1" colspan="1" tabindex="0"
+                  aria-controls="dataTable"
+                  style="width: 126px;"><br>MM1
+                  <span data-toggle="tooltip"
+                  data-placement="right"
+                  data-title="Number of off-target sites with mismatches (hamming distance) of 1 base in the genome"
+                  data-original-title="" title="">
+                  <i class="fas fa-info-circle"
+                    id="tooltip-tsne"
+                    style="color: #A6B0C3;"></i>
+                </span></th>
+                <th class="dt-body-right sorting"
+                  rowspan="1" colspan="1" tabindex="0"
+                  aria-controls="dataTable"
+                  style="width: 126px;"><br>MM2
+                  <span data-toggle="tooltip"
+                  data-placement="right"
+                  data-title="Number of off-target sites with mismatches (hamming distance) of 2 base in the genome"
+                  data-original-title="" title="">
+                  <i class="fas fa-info-circle"
+                    id="tooltip-tsne"
+                    style="color: #A6B0C3;"></i>
+                </span></th>
+                <th class="dt-body-right sorting"
+                  rowspan="1" colspan="1" tabindex="0"
+                  aria-controls="dataTable"
+                  style="width: 126px;"><br>MM3
+                  <span data-toggle="tooltip"
+                  data-placement="right"
+                  data-title="Number of off-target sites with mismatches (hamming distance) of 3 base in the genome"
+                  data-original-title="" title="">
+                  <i class="fas fa-info-circle"
+                    id="tooltip-tsne"
+                    style="color: #A6B0C3;"></i>
+                </span></th>
+                <th class="dt-body-right sorting"
+                  rowspan="1" colspan="1" tabindex="0"
+                  aria-controls="dataTable"
+                  style="width: 226px;"><br>Moreno
+                  <span data-toggle="tooltip"
+                  data-placement="right"
+                  data-title="Activity score according to Moreno et al. On the basis of the experimental validation, efficient sgRNAs scored above 0.55, and highly efficient ones scored above 0.70"
+                  data-original-title="" title="">
+                  <i class="fas fa-info-circle"
+                    id="tooltip-tsne"
+                    style="color: #A6B0C3;"></i>
+                </span></th>
+                <th class="dt-body-right sorting"
+                  rowspan="1" colspan="1" tabindex="0"
+                  aria-controls="dataTable"
+                  style="width: 226px;"><br>Azimuth
+                  <span data-toggle="tooltip"
+                  data-placement="right"
+                  data-title="Activity score according to Azimuth et al. We use the Azimuth 2.0 model to calculate the on-target score for each candidate sgRNA target sequence."
+                  data-original-title="" title="">
+                  <i class="fas fa-info-circle"
+                    id="tooltip-tsne"
+                    style="color: #A6B0C3;"></i>
+                </span></th>
+
+                <th class="dt-body-right sorting"
+                  rowspan="1" colspan="1" tabindex="0"
+                  aria-controls="dataTable"
+                  style="width: 126px;"><br>Off-target Score
+                  <span data-toggle="tooltip"
+                  data-placement="right"
+                  data-title="Off-target score"
+                  data-original-title="" title="">
+                  <i class="fas fa-info-circle"
+                    id="tooltip-tsne"
+                    style="color: #A6B0C3;"></i>
+                </span>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="main-tablebody-1">
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-body hidden" id="main-datatable-3"
+      style="color:black;text-align: center;">
+      <h1 id="search-result-pannel-3"></h1>
+      <div id="dataTable_wrapper"
+        class="dataTables_wrapper no-footer">
+        <table id="dataTable-3"
+          class="display nowrap dataTable dtr-inline no-footer"
+          role="grid" style="width: 100%;" cellspacing="0"
+          width="100%" aria-describedby="dataTable_info">
+          <thead role="row">
+            <tr role="row">
+              <th class="sorting" rowspan="1" colspan="1"
+                tabindex="0" aria-controls="dataTable"
+                style="width: 20px;">
+                <br>
+                gSeq
+                <span data-toggle="tooltip"
+                  data-placement="right"
+                  data-title="The sgRNA sequence"
+                  data-original-title="" title="">
+                  <i class="fas fa-info-circle"
+                    id="tooltip-tsne"
+                    style="color: #A6B0C3;"></i>
+                </span>
+              </th>
+              <th class="sorting" rowspan="1" colspan="1"
+                tabindex="0" aria-controls="dataTable"
+                style="width: 30px;">
+                <br>
+                On target
+                <span data-toggle="tooltip"
+                  data-placement="right"
+                  data-title=""
+                  data-original-title="" title="">
+                  <i class="fas fa-info-circle"
+                    id="tooltip-tsne"
+                    style="color: #A6B0C3;"></i>
+                </span>
+              </th>
+              <th class="sorting" rowspan="1" colspan="1"
+              tabindex="0" aria-controls="dataTable"
+              style="width: 20px;">
+              <br>
+              On target percentage
+              <span data-toggle="tooltip"
+                data-placement="right"
+                data-title=""
+                data-original-title="" title="">
+                <i class="fas fa-info-circle"
+                  id="tooltip-tsne"
+                  style="color: #A6B0C3;"></i>
+              </span>
+            </th>
+          </th>
+          <th class="sorting" rowspan="1" colspan="1"
+            tabindex="0" aria-controls="dataTable"
+            style="width: 220px;">
+            <br>
+            Combined coverage
+            <span data-toggle="tooltip"
+              data-placement="right"
+              data-title="The offtarget sites on other genomic elements"
+              data-original-title="" title="">
+              <i class="fas fa-info-circle"
+                id="tooltip-tsne"
+                style="color: #A6B0C3;"></i>
+            </span>
+          </th>
+        
+            <th class="sorting" rowspan="1" colspan="1"
+              tabindex="0" aria-controls="dataTable"
+              style="width: 220px;">
+              <br>
+              Off target (TEs)
+              <span data-toggle="tooltip"
+                data-placement="right"
+                data-title="The offtarget sites on other TE families"
+                data-original-title="" title="">
+                <i class="fas fa-info-circle"
+                  id="tooltip-tsne"
+                  style="color: #A6B0C3;"></i>
+              </span>
+            </th>
+            </th>
+              <th class="sorting" rowspan="1" colspan="1"
+                tabindex="0" aria-controls="dataTable"
+                style="width: 220px;">
+                <br>
+                Off target (Others)
+                <span data-toggle="tooltip"
+                  data-placement="right"
+                  data-title="The offtarget sites on other genomic elements"
+                  data-original-title="" title="">
+                  <i class="fas fa-info-circle"
+                    id="tooltip-tsne"
+                    style="color: #A6B0C3;"></i>
+                </span>
+              </th>
+            </tr>
+            
+          </thead>
+          <tbody id="main-tablebody-3">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <a id="gseq-detail-anchor"></a>
+      <div class="hidden" id="gseq-detail">
+        <div class="justify-content-center row" id="dataTable-2-select" style="margin: auto 5pt;">
+          <select id="dataTable-2-select-mm" class="label ui selection dropdown">
+            <option value='0'>Targets with 0 mismatched base</option>
+            <option value='1'>Targets with 1 mismatched base</option>
+            <option value='2'>Targets with 2 mismatched bases</option>
+            <option value='3'>Targets with 3 mismatched bases</option>
+          </select>
+          <select id="dataTable-2-select-dropdown" class="label ui selection dropdown">
+          </select>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-sm-5">
+                <h3> mismatch 0</h3>
+                <div id="mm0-2" class="detail-mm"
+                  style="text-align: left;"></div>
+              </div>
+              <div class="col-sm-5">
+                <h3> mismatch 1</h3>
+                <div id="mm1-2" class="detail-mm"
+                  style="text-align: left;"></div>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 2rem;">
+              <div class="col-sm-5">
+                <h3> mismatch 2</h3>
+                <div id="mm2-2" class="detail-mm"
+                  style="text-align: left;"></div>
+              </div>
+              <div class="col-sm-5">
+                <h3> mismatch 3</h3>
+                <div id="mm3-2" class="detail-mm-"
+                  style="text-align: left;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card-body" id="main-datatable-2"
+              style="color:black;text-align: center;">
+              <div id="dataTable_wrapper"
+                class="dataTables_wrapper no-footer">
+                <table id="dataTable-2"
+                  class="display nowrap dataTable dtr-inline no-footer"
+                  role="grid" style="width: 100%;" cellspacing="0"
+                  width="100%" aria-describedby="dataTable_info">
+                  <thead role="row">
+                    <tr role="row">
+                        <th class="sorting" rowspan="1" colspan="1"
+                          tabindex="0" aria-controls="dataTable"
+                          style="width: 20px;">
+                          <br>
+                          gSeq
+                          <span data-toggle="tooltip"
+                            data-placement="right"
+                            data-title="The sgRNA sequence"
+                            data-original-title="" title="">
+                            <i class="fas fa-info-circle"
+                              id="tooltip-tsne"
+                              style="color: #A6B0C3;"></i>
+                          </span>
+                        </th>
+                        <th class="dt-body-right sorting"
+                        rowspan="1" colspan="1" tabindex="0"
+                        aria-controls="dataTable"
+                        style="width: 200px;"><br>chrom</th>
+                        <th class="dt-body-right sorting"
+                        rowspan="1" colspan="1" tabindex="0"
+                        aria-controls="dataTable"
+                        style="width: 200px;"><br>start</th>
+                        <th class="dt-body-right sorting"
+                        rowspan="1" colspan="1" tabindex="0"
+                        aria-controls="dataTable"
+                        style="width: 200px;"><br>end</th>
+                        <th class="dt-body-right sorting"
+                        rowspan="1" colspan="1" tabindex="0"
+                        aria-controls="dataTable"
+                        style="width: 200px;"><br>strand</th>
+                        <th class="dt-body-right sorting"
+                        rowspan="1" colspan="1" tabindex="0"
+                        aria-controls="dataTable"
+                        style="width: 200px;"><br>annotation</th>
+                    </tr>
+                  </thead>
+                  <tbody id="main-tablebody-2">
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>  
+      </div>
+    </div>
+    <div class="container">
+      <detail id="detail" class="hidden fixed" style="text-align: center; color:black">
+        <h2> sgRNA Detailed Information
+        </h2>
+        <div id="grna-detail" style="border-bottom:0"></div>
+        <div id="result-viewer" class="dash"></div>
+        <div id="detail-info"
+          style="margin-top: 3rem;color:black">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="row">
+                <div class="col-sm-5">
+                  <h3> mismatch 0</h3>
+                  <div id="mm0" class="detail-mm"
+                    style="text-align: left;"></div>
+                </div>
+                <div class="col-sm-5">
+                  <h3> mismatch 1</h3>
+                  <div id="mm1" class="detail-mm"
+                    style="text-align: left;"></div>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 2rem;">
+                <div class="col-sm-5">
+                  <h3> mismatch 2</h3>
+                  <div id="mm2" class="detail-mm"
+                    style="text-align: left;"></div>
+                </div>
+                <div class="col-sm-5">
+                  <h3> mismatch 3</h3>
+                  <div id="mm3" class="detail-mm"
+                    style="text-align: left;"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card-body hidden" id="main-datatable-1-5"
+              style="color:black;text-align: center;">
+              <div id="dataTable_wrapper"
+                class="dataTables_wrapper no-footer">
+                <div class="justify-content-center row" id="dataTable-1-5-select" style="margin: auto 5pt;">
+                  <select id="dataTable-1-5-select-dropdown" class="label ui selection dropdown">
+                    <option value='0'>Targets with 0 mismatched base</option>
+                    <option value='1'>Targets with 1 mismatched base</option>
+                    <option value='2'>Targets with 2 mismatched bases</option>
+                    <option value='3'>Targets with 3 mismatched bases</option>
+                  </select>
+                </div>
+                <table id="dataTable-1-5"
+                  class="display nowrap dataTable dtr-inline no-footer"
+                  role="grid" style="width: 100%;" cellspacing="0"
+                  width="100%" aria-describedby="dataTable_info">
+                  <thead role="row">
+                    <tr role="row">
+                          <th class="sorting" rowspan="1" colspan="1"
+                          tabindex="0" aria-controls="dataTable"
+                          style="width: 20px;">
+                          <br>
+                          gSeq
+                          <span data-toggle="tooltip"
+                            data-placement="right"
+                            data-title="The sgRNA sequence"
+                            data-original-title="" title="">
+                            <i class="fas fa-info-circle"
+                              id="tooltip-tsne"
+                              style="color: #A6B0C3;"></i>
+                          </span>
+                        </th>
+                        <th class="dt-body-right sorting"
+                        rowspan="1" colspan="1" tabindex="0"
+                        aria-controls="dataTable"
+                        style="width: 200px;"><br>chrom</th>
+                        <th class="dt-body-right sorting"
+                        rowspan="1" colspan="1" tabindex="0"
+                        aria-controls="dataTable"
+                        style="width: 200px;"><br>start</th>
+                        <th class="dt-body-right sorting"
+                        rowspan="1" colspan="1" tabindex="0"
+                        aria-controls="dataTable"
+                        style="width: 200px;"><br>end</th>
+                        <th class="dt-body-right sorting"
+                        rowspan="1" colspan="1" tabindex="0"
+                        aria-controls="dataTable"
+                        style="width: 200px;"><br>strand</th>
+                        <th class="dt-body-right sorting"
+                        rowspan="1" colspan="1" tabindex="0"
+                        aria-controls="dataTable"
+                        style="width: 200px;"><br>annotation</th>
+                    </tr>
+                  </thead>
+                  <tbody id="main-tablebody-1-5">
+      
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </detail>
+    </div>
+  </section>
+
+  {% endblock content %}
+  

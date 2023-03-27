@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description"
+    content="Purpose Application UI is the following chapter we've finished in order to create a complete and robust solution next to the already known Purpose Website UI.">
+  <meta name="author" content="Webpixels">
+  <title>CRISRPTE – Design sgRNA for TEs</title>
+  <!-- Favicon -->
+  <link rel="icon"
+    href="{% static 'img/brand/favicon.png' %}"
+    type="image/png">
+  <!-- Semantic -->
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css'>  
+  <!-- Font Awesome 5 -->
+  <link rel="stylesheet"
+    href="{% static 'libs/@fortawesome/fontawesome-pro/css/all.min.css' %}">
+  <!-- Page CSS -->
+  <link rel="stylesheet"
+    href="{% static 'libs/swiper/dist/css/swiper.min.css' %}">
+  <!-- Purpose CSS -->
+  <link rel="stylesheet"
+    href="{% static 'css/purpose.css' %}" id="stylesheet">
+</head>
+<style>
+  @font-face {
+    font-family: "WhitneyK-Semibold";
+    src: url("{% static 'libs/fonts/WhitneyK-Semibold.otf' %}") format("opentype");
+  }
+</style>
+
+<body>
+  <!-- Nav -->
+  <nav
+    class="navbar navbar-main navbar-expand-lg navbar-light navbar-border py-3"
+    id="navbar-main">
+    <div class="container px-lg-0">
+      <!-- Logo -->
+      <a class="navbar-brand mr-lg-5" href="index.html">
+        <img src={% static 'img/brand/CRISPRTE_logo_black.png' %}>
+      </a>
+      <small>version 0.0.1</small>
+      <!-- Navbar collapse trigger -->
+      <button class="navbar-toggler pr-0" type="button"
+        data-toggle="collapse"
+        data-target="#navbar-main-collapse"
+        aria-controls="navbar-main-collapse"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Navbar nav -->
+      <div class="collapse navbar-collapse"
+        id="navbar-main-collapse">
+        <ul
+          class="navbar-nav align-items-lg-center ml-lg-auto">
+          <li class="nav-item dropdown dropdown-animate"
+            data-toggle="hover">
+            <a class="nav-link dropdown-toggle" href="#"
+              role="button" data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false">Docs</a>
+            <div
+              class="dropdown-menu dropdown-menu-right dropdown-menu-lg dropdown-menu-arrow p-0">
+              <ul class="list-group list-group-flush">
+                <li>
+                  <a href="docs/index.html"
+                    class="list-group-item list-group-item-action"
+                    role="button">
+                    <div
+                      class="media d-flex align-items-center">
+                      <!-- SVG icon -->
+                      <figure style="width: 50px;">
+                        <img alt="Image placeholder"
+                          src="{% static 'img/icons/essential/detailed/DOC_File.svg' %}"
+                          class="svg-inject img-fluid"
+                          style="height: 50px;">
+                      </figure>
+                      <!-- Media body -->
+                      <div class="media-body ml-3">
+                        <h6 class="mb-1">Documentation</h6>
+                        <p class="mb-0">Awesome section
+                          examples for any scenario.</p>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+               
+              </ul>
+              <div
+                class="dropdown-menu-links rounded-bottom delimiter-top p-4">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <a href="docs/getting-started/installation.html"
+                      class="dropdown-item">Installation</a>
+                    <a href="docs/getting-started/file-structure.html"
+                      class="dropdown-item">File
+                      structure</a>
+                    <a href="docs/getting-started/build-tools.html"
+                      class="dropdown-item">Build tools</a>
+                    <a href="docs/getting-started/customization.html"
+                      class="dropdown-item">Customization</a>
+                  </div>
+                  <div class="col-sm-6">
+                    <a href="docs/getting-started/plugins.html"
+                      class="dropdown-item">Using
+                      plugins</a>
+                    <a href="docs/components/index.html"
+                      class="dropdown-item">Components</a>
+                    <a href="docs/plugins/animate.html"
+                      class="dropdown-item">Plugins</a>
+                    <a href="docs/support.html"
+                      class="dropdown-item">Support</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <!-- Logo -->
+        <a class="navbar-brand mr-lg-5" href="index.html">
+          <img src={% static 'img/brand/logo_black.png' %}>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <!-- Main content -->
+  <section class="slice bg-white rounded-bottom"
+    id="sct-features">
+    <div class="container">
+        <div class="card shadow-lg" style="height: min-content;">
+
+            <div class="wrapper center" {% if not uid %} style="display: none;" {% endif %}>
+                You can check your results minutes later via {% if uid %}
+                <h2 style="color:blueviolet;font-size: larger; font-weight: bolder;font-family: Arial;" value={{ uid }}>{{ uid }}</h2>{% endif %}
+            </div>
+
+            <div id="message" class="wrapper center" {% if not message %} style="display: none;" {% endif %}>
+                {% if message %}
+                <h3>{{ message }}</h3>
+                {% endif %}
+            </div>
+            <div id="coverage">
+
+            </div>
+            <div class="card-body" id="main-datatable" style="color:black">
+                <div id="dataTable_wrapper" class="dataTables_wrapper no-footer">
+                    <table id="dataTable" class="display nowrap dataTable dtr-inline no-footer" role="grid" style="width: 100%;" cellspacing="0" width="100%" aria-describedby="dataTable_info">
+                        <thead role="row">
+                            <tr role="row">
+                                <th class="sorting_asc" rowspan="1" colspan="1" tabindex="0" aria-controls="dataTable" aria-sort="ascending" style="width: 169px;"><br>Rank</th>
+                                <th class="sorting" rowspan="1" colspan="1" tabindex="0" aria-controls="dataTable" style="width: 161px;"><br>gSeq</th>
+                                <th class="dt-body-right sorting" rowspan="1" colspan="1" tabindex="0" aria-controls="dataTable" style="width: 200px;"><br>Pos</th>
+                                <th class="dt-body-right sorting" rowspan="1" colspan="1" tabindex="0" aria-controls="dataTable" style="width: 126px;"><br>Strand</th>
+                                <th class="dt-body-right sorting" rowspan="1" colspan="1" tabindex="0" aria-controls="dataTable" style="width: 126px;"><br>GC-content</th>
+                                <th class="dt-body-right sorting" rowspan="1" colspan="1" tabindex="0" aria-controls="dataTable" style="width: 126px;"><br>MM0</th>
+                                <th class="dt-body-right sorting" rowspan="1" colspan="1" tabindex="0" aria-controls="dataTable" style="width: 126px;"><br>MM1</th>
+                                <th class="dt-body-right sorting" rowspan="1" colspan="1" tabindex="0" aria-controls="dataTable" style="width: 126px;"><br>MM2</th>
+                                <th class="dt-body-right sorting" rowspan="1" colspan="1" tabindex="0" aria-controls="dataTable" style="width: 126px;"><br>MM3</th>
+                                <th class="dt-body-right sorting" rowspan="1" colspan="1" tabindex="0" aria-controls="dataTable" style="width: 126px;"><br>Initial Score</th>
+                                <th class="dt-body-right sorting" rowspan="1" colspan="1" tabindex="0" aria-controls="dataTable" style="width: 126px;"><br>Efficiency</th>
+                            </tr>
+                        </thead>
+                        <tbody id="main-tablebody">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="main-loading"></div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer footer-light bg-white pt-0">
+        <div class="container">
+          <div
+            class="row align-items-center justify-content-md-between py-4 delimiter-top">
+            <div class="col-md-6">
+              <div
+                class="copyright text-sm font-weight-bold text-center text-md-left">
+                &copy; 2021 <a href="https://labw.org"
+                  class="h6 text-sm font-weight-bold"
+                  target="_blank">LabW</a>. All rights reserved.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <ul
+                class="nav justify-content-center justify-content-md-end mt-3 mt-md-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="https://github.com/"
+                    target="_blank">
+                    <i class="fab fa-github"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+  </footer>
+  <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
+  <script src="{% static 'js/purpose.core.js' %}"></script>
+  <!-- Page JS -->
+  <script
+    src="{% static 'libs/swiper/dist/js/swiper.min.js' %}"></script>
+  <!-- Purpose JS -->
+  <script src="{% static 'js/purpose.js' %}"></script>
+  <!-- Demo JS - remove it when starting your project -->
+  <script src="{% static 'js/demo.js' %}"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async
+    src="https://www.googletagmanager.com/gtag/js?id=UA-104437451-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-104437451-1');
+  </script>
+</body>
+
+</html>

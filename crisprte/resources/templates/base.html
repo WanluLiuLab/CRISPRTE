@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Purpose Application UI is the following chapter we've finished in order to create a complete and robust solution next to the already known Purpose Website UI.">
+    <meta name="author" content="Webpixels">
+    <title>CRISPR-TE – Design sgRNA for TEs</title>
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'img/brand/favicon.png' %}" type="image/png">
+    <!-- Semantic -->
+    <link rel='stylesheet' href="{% static 'css/semantic.min.css' %}">
+    <!-- Font Awesome 5 -->
+    <link rel="stylesheet" href="{% static 'libs/@fortawesome/fontawesome-pro/css/all.min.css' %}">
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="{% static 'libs/swiper/dist/css/swiper.min.css' %}">
+    <!-- Purpose CSS -->
+    <link rel="stylesheet" href="{% static 'css/purpose.css' %}" id="stylesheet">
+    <!-- Textarea highlight -->
+    <link rel="stylesheet" href="{% static 'css/jquery.highlight-within-textarea.css' %}" id="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/fontawesome-6.2.1/css/all.min.css' %}">
+</head>
+<style>
+    body {
+        font-family: Helvetica, Arial, sans-serif;
+    }
+    
+    @font-face {
+        font-family: "WhitneyK-Semibold";
+        src: url("{% static 'libs/fonts/WhpitneyK-Semibold.otf' %}") format("opentype");
+    }
+    
+    @font-face {
+        font-family: "Inter";
+        src: url("{% static 'libs/fonts/Inter-VariableFont_slnt,wght.ttf' %}");
+    }
+    
+    .result-row {
+        cursor: pointer;
+        border-top: #EFF2F5;
+        border-bottom: #EFF2F5;
+    }
+    
+    .sorting {
+        cursor: pointer;
+    }
+    
+    .result-row:hover {
+        background-color: #EFF2F5;
+    }
+    
+    .text {
+        font-weight: 900 !important;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    .tooltip {
+        display: inline;
+        position: relative;
+    }
+    
+    .tooltip:hover:after {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: center;
+        justify-content: center;
+        background: #444;
+        border-radius: 8px;
+        color: #fff;
+        content: attr(title);
+        margin: -82px auto 0;
+        font-size: 16px;
+        padding: 13px;
+        width: 220px;
+    }
+    
+    .tooltip:hover:before {
+        border: solid;
+        border-color: #444 transparent;
+        border-width: 12px 6px 0 6px;
+        content: "";
+        left: 45%;
+        bottom: 30px;
+        position: absolute;
+    }
+    
+    .d3tooltip {
+        font-size: 12pt;
+        color: black;
+        position: absolute;
+        z-index: 100;
+        padding: 2px 2px;
+        visibility: hidden;
+        border-color: #000 !important;
+        border-radius: 5pt;
+        border-width: 1px !important;
+        border: solid !important;
+        background-color: #FFFFFF;
+    }
+    
+    .hov-tooltip {
+        position: absolute;
+        text-align: center;
+        width: max-content;
+        font: 15px sans-serif;
+        background: #F8F8FC;
+        border: 0px;
+        pointer-events: none;
+        padding-left: 3pt;
+        padding-right: 3pt;
+        border-color: #000 !important;
+        border-radius: 5pt;
+        border-width: 1px !important;
+        border: solid !important;
+    }
+    
+    .log {
+        text-size-adjust: none;
+        --color-bg: #252a33;
+        --color-text: #eee;
+        --color-text-subtle: #a2a2a2;
+        -webkit-font-smoothing: antialiased;
+        -webkit-print-color-adjust: exact;
+        max-width: 100%;
+        background: var(--color-bg);
+        color: var(--color-text);
+        font-size: 15px;
+        font-family: 'Roboto Mono', 'Fira Mono', Consolas, Menlo, Monaco, 'Courier New', Courier, monospace;
+        border-radius: 4px;
+        padding: 5px 5px 5px;
+        margin-bottom: 5px !important;
+        position: relative;
+        box-sizing: border-box;
+        width: 700px;
+        max-height: 60px;
+        overflow-y: scroll;
+        margin: auto auto;
+    }
+    
+    .text-container {
+        display: block;
+        margin: 0 auto;
+        transform: translateZ(0);
+        text-align: center;
+    }
+    
+    .backdrop {
+        z-index: 1;
+        overflow: auto;
+        pointer-events: none;
+        transition: transform 1s;
+        font-family: inherit;
+        text-transform: none;
+        font-weight: 700;
+        font-size: .85714286rem;
+        text-align: left;
+        -webkit-tap-highlight-color: transparent;
+        cursor: pointer;
+        word-wrap: break-word;
+        line-height: 1em;
+        white-space: normal;
+        color: rgba(0, 0, 0, .87);
+        background-color: rgba(0, 0, 0, 0) !important;
+        font-size: 12pt !important;
+        font-family: Courier;
+        line-height: 200% !important;
+        padding: 0 !important;
+    }
+    
+    .highlights {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-weight: 100;
+    }
+    
+    mark {
+        border-radius: 3px;
+        color: black !important;
+        cursor: pointer !important;
+    }
+    
+    textarea {
+        line-height: 200% !important;
+        font-size: 12pt !important;
+        max-height: 100pt;
+    }
+    
+     ::__web-inspector-hide-shortcut__ {
+        display: none;
+    }
+    
+     ::-webkit-calendar-picker-indicator {
+        border: 1px solid rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, 0);
+        color: rgba(0, 0, 0, 0);
+    }
+</style>
+
+<body>
+    <!-- Nav -->
+    {% block header %}
+    <header class="header" id="header-main">
+        <nav class="navbar navbar-main navbar-expand-lg navbar-light navbar-border" id="navbar-main" style="background-color: white;">
+            <div class="container px-lg-0">
+                <!-- Logo -->
+                <a class="navbar-brand mr-lg-5" href="..">
+                    <img src={% static 'img/brand/CRISPRTE_logo_black.png' %}>
+                </a>
+                <small>version {{ version }}</small>
+                <!-- Navbar collapse trigger -->
+                <button class="navbar-toggler pr-0" type="button" data-toggle="collapse" data-target="#navbar-main-collapse" aria-controls="navbar-main-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+                <!-- Navbar nav -->
+
+                <div class="collapse navbar-collapse" id="navbar-main-collapse">
+                    <ul class="navbar-nav align-items-lg-center ml-lg-auto" style="margin-right: 20pt;">
+                        <a href="./doc" class="list-group-item-action" role="button">Docs</a>
+                    </ul>
+                    <!-- Logo -->
+                    <a class="navbar-brand mr-lg-5" href="https://www.labw.org">
+                        <img src={% static 'img/brand/logo_black.png' %}>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    {% endblock header %}
+    <!-- Header end-->
+    <!-- **************** MAIN CONTENT START **************** -->
+    {% block content %} {% endblock content %} {% block footer %}
+    <!-- Footer start -->
+    <footer class="footer footer-light bg-white pt-0">
+        <div class="container">
+            <div class="row align-items-center justify-content-md-between py-4 delimiter-top">
+                <div class="col-md-6">
+                    <div class="copyright text-sm font-weight-bold text-center text-md-left">
+                        &copy; 2022 <a href="https://labw.org" class="h6 text-sm font-weight-bold" target="_blank">LabW</a>. All rights reserved.
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <ul class="nav justify-content-center justify-content-md-end mt-3 mt-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="https://github.com/" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    {% endblock footer %}
+    <!-- Pako.js - Zlib -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pako/2.0.4/pako.min.js"></script>
+    <!-- Textarea Highlight -->
+    <script src="{% static 'js/purpose.core.js' %}"></script>
+    <!-- Core JS - includes jquery, bootstrap, popper, in-view and sticky-kit -->
+    <script src="{% static 'js/jquery.highlight-within-textarea.js' %}"></script>
+    <!-- Page JS -->
+    <script src="{% static 'libs/swiper/dist/js/swiper.min.js' %}"></script>
+    <!-- Purpose JS -->
+    <script src="{% static 'js/purpose.js' %}"></script>
+    <!-- DataTable -->
+    <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+    <!-- D3.js -->
+    <script src="{% static 'js/d3.v6.js' %}"></script>
+    <script src="{% static 'js/genome.viz.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/semantic.js' %}"></script>
+    <script>
+        $('.dropdown').
+        dropdown();
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var body = document.body,
+                html = document.documentElement;
+
+            var height = Math.max(body.scrollHeight, body.offsetHeight,
+                html.clientHeight, html.scrollHeight, html.offsetHeight);
+            $(".main-content").find("h1,h2,h3,h4,h5,h6").each(function(i, item) {
+                var tag = $(item).get(0).nodeName.toLowerCase();
+                $(item).attr("id", "h" + i);
+                $("#sidenav-collapse-main").append('<li><a class="title-' + tag + ' sidebar-link" href="#h' + i + '">' + $(this).text() + '</a></li>');
+            });
+            $(".scroll-wrapper").find(".scroll-element scroll-x").remove()
+            $(window).on("scroll", d => {
+                $(".navbar-expand-xs").css("height", 1000 + Math.min(height, $(window).scrollTop()))
+                $(".scroll-wrapper").css("top", $(window).scrollTop())
+            })
+        })
+    </script>
+</body>
+
+</html>
