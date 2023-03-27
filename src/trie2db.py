@@ -21,16 +21,13 @@ from dbutils import *
 from grna_scoring import *
 from grna_annotate import *
 
-
-fa_path = ""
-trie_data_path = ""
+import trie 
 
 GROUPBY1 = lambda l: [(k, list([y for (x,y) in l if x == k])) for k in dict(l).keys()]
 FLATTEN = lambda x: [i for s in x for i in s]
 
-file_path = ""
 sql = SQLite()
-def trie2db_1(t,db_path):
+def trie2db_1(fa_path, db_path, trie_data_path):
 
     #######################################
     #    This step is Memory Consuming    #
@@ -55,11 +52,11 @@ def trie2db_1(t,db_path):
     # whether to use gzip?
     with open(trie_data_path, "wb+") as f:
         trie.save(f,t)
-
+    return t
 
 
     
-def trie2db_2(t,db_path):
+def trie2db_2(t, file_path, db_path):
 
     conn =  sql.connect(db_path)
     cursor = conn.cursor()
@@ -132,7 +129,8 @@ def trie2db_2(t,db_path):
     conn.commit()
     conn.close()
 
-def map_function(gids):
+def map_function_1(conn, gids):
+    cursor = conn.cursor()
     for i in tqdm.trange(len(gids)):
         gid = gids[i]
         k = sql.select_gseq_table2_gid(cursor, gid)
@@ -144,7 +142,7 @@ def map_function(gids):
     conn.close()
     return gids
 
-def map_function(fp, gids): 
+def map_function_2(fp, t, gids): 
     conn = sql.connect("Homo_sapiens.GRCh38.97.dna.primary_assembly.gRNA.db") 
     cursor = conn.cursor() 
     for i in tqdm.trange(len(gids)): 
